@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from corsheaders.defaults import default_headers
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -14,7 +15,44 @@ SECRET_KEY = 'django-insecure-36-%@*i+c3j%5npui3x9p-xts#-zm939mcovo+1%pv$n_706gm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '*',
+    '35.92.226.26',
+    'localhost', '127.0.0.1'  # Localhost
+    # 'backend.crrms.dataterrain-dev.net',
+]
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'Content-Disposition',
+    'X-Api-Key',
+    'X-Forwarded-Host',
+    'X-Forwarded-Proto',
+    'X-Api-Auth-Key',
+    'referer',
+    'region',
+]
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://localhost:8080',
+    'http://localhost',
+    #aws
+    # 'http://crrms-dev.s3-website-us-east-1.amazonaws.com'
+    # 'http://127.0.0.1:8000/'
+]
+
+CSRF_TRUSTED_ORIGINS =  [
+    #local
+    'http://127.0.0.1:8000',
+    'http://localhost:3000',
+    'http://localhost:8080',
+    'http://localhost',
+    #aws
+    # 'http://crrms-dev.s3-website-us-east-1.amazonaws.com',
+]
 
 
 # Application definition
