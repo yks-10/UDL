@@ -18,8 +18,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '*',
     '35.92.226.26',
-    'localhost', '127.0.0.1'  # Localhost
-    # 'backend.crrms.dataterrain-dev.net',
+    'localhost', '127.0.0.1'
 ]
 
 CORS_ALLOW_HEADERS = list(default_headers) + [
