@@ -10,6 +10,9 @@ from rest_framework.permissions import AllowAny
 from unicodedata import category
 
 from common.permissions import TokenExpired, UnauthorizedAccess
+from user.models import Blocklist
+
+
 # from user.models import Blocklist, User
 
 
@@ -61,13 +64,6 @@ class JWTAuthenticationMiddleware(MiddlewareMixin):
             r'^/signup/',
             r'^/admin/',
             r'^/media/',
-            r'^/social-login/',
-            r'^/category-list/',
-            r'^/accept-request/',
-            r'^/api/agent/category/',
-            r'^/api/agent/category-list/',
-            r'^/api/docusign/candidate/',
-            r'^/api/notifications/',
         ]
 
         # Skip middleware for public endpoints

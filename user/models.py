@@ -35,15 +35,7 @@ class User(AbstractUser):
     is_deleted = models.BooleanField(default=False)
     is_agree = models.BooleanField(null=True, default=None)
     unique_id = models.CharField(max_length=255, unique=True, blank=True, null=True)
-    parent_partner = models.ForeignKey(
-        'self',
-        on_delete=models.SET_NULL,
-        related_name='staff_members',
-        null=True,
-        blank=True,
-        limit_choices_to={'user_type': PARTNER},
-        help_text="Only applicable for staff users. Select the partner this staff belongs to."
-    )
+
 
     last_active_time = models.DateTimeField(null=True, blank=True, default=now)
     created_at = models.DateTimeField(auto_now_add=True)

@@ -1,14 +1,13 @@
 import jwt
 from rest_framework.exceptions import APIException
 from rest_framework.permissions import BasePermission, IsAuthenticated, IsAdminUser
-# from user.models import User
+from user.models import User, Blocklist
 from environment.main import JWT_SECRET_KEY, JWT_ALGORITHM
 from datetime import datetime, timedelta, date
 from rest_framework import status
 from validators.Errormessage import ErrorMessage
 from validators.Errorcode import ErrorCode
 from validators.Error import Error
-# from user.models import Blocklist
 
 class UnauthorizedAccess(APIException):
     """
