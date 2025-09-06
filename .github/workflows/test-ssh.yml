@@ -1,0 +1,31 @@
+name: Test SSH Connection
+
+on:
+  workflow_dispatch
+
+jobs:
+  test-ssh:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Test SSH connection to EC2
+      uses: appleboy/ssh-action@v0.1.10
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          echo "SSH connection successful!"
+          echo "Current user: $(whoami)"
+          echo "Current directory: $(pwd)"
+          echo "--- UDL directory contents ---"
+          ls -la /home/ubuntu/UDL
+          echo "--- Services status ---"
+          sudo systemctl status gunicorn --no-pager || true
+          sudo systemctl status nginx --no-pager || true
+
+
+
+
+
+
+
