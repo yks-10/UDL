@@ -7,6 +7,30 @@ jobs:
   test-ssh:
     runs-on: ubuntu-latest
     steps:
+    - name: Debug - Check secrets availability
+      run: |
+        echo "Checking if secrets are available..."
+        if [ -z "${{ secrets.EC2_HOST }}" ]; then
+          echo "❌ EC2_HOST secret is missing or empty"
+          exit 1
+        else
+          echo "✅ EC2_HOST secret is available: ${{ secrets.EC2_HOST }}"
+        fi
+        
+        if [ -z "${{ secrets.EC2_USER }}" ]; then
+          echo "❌ EC2_USER secret is missing or empty"
+          exit 1
+        else
+          echo "✅ EC2_USER secret is available: ${{ secrets.EC2_USER }}"
+        fi
+        
+        if [ -z "${{ secrets.SSH_PRIVATE_KEY }}" ]; then
+          echo "❌ SSH_PRIVATE_KEY secret is missing or empty"
+          exit 1
+        else
+          echo "✅ SSH_PRIVATE_KEY secret is available (length: ${#SSH_PRIVATE_KEY} chars)"
+        fi
+
     - name: Test SSH connection to EC2
       uses: appleboy/ssh-action@v0.1.10
       with:
@@ -19,13 +43,3 @@ jobs:
           echo "Current directory: $(pwd)"
           echo "--- UDL directory contents ---"
           ls -la /home/ubuntu/UDL
-          echo "--- Services status ---"
-          sudo systemctl status gunicorn --no-pager || true
-          sudo systemctl status nginx --no-pager || true
-
-
-
-
-
-
-
